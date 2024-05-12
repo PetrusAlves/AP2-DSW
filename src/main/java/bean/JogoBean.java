@@ -35,7 +35,7 @@ public class JogoBean {
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!", "Numeros Cadastrados"));
 			}
 		}
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
