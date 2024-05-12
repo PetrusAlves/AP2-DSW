@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+	<title>Listagem dos Numeros</title>
+</h:head>
+
+<h:body>
+	<h1>Resultado do Sorteio</h1>
+
+	<h:form id="formulario">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="tabela" value="#{jogoBean.lista}" var="item"
+			editable="true" style="margin-bottom:20px">
+			
+			<p:column headerText="Id">
+				<h:outputText value="#{item.id}" />
+			</p:column>
+			
+			<p:column headerText="Data do Jogo">
+				<h:outputText value="#{item.dataCadastro}" />
+			</p:column>
+			
+			<p:column headerText="Nome do jogador">
+				<h:outputText value="#{item.nomeJogador}" />
+			</p:column>
+			
+			<p:column headerText="Numero Apostado">
+    			<h:outputText value="#{item.numeroAposta}" />
+			</p:column>
+
+			<p:column headerText="Número Secreto">
+				<h:outputText value="#{item.numeroSecreto}" />
+			</p:column>
+
+			<p:column headerText="Excluir">
+			    <p:commandButton action="#{jogoBean.excluir(item.id)}" 
+			    icon="pi pi-trash" styleClass="p-button-rounded p-button-danger"
+			    update="formulario" type="submit"/>
+			</p:column>
+
+			<p:column headerText="Resultado">
+				<p:commandButton action="#{jogoBean.verificarSorteado(item)}"
+					value="Verificar Resultado" type="submit" styleClass="rounded-button" update="formulario" />
+			</p:column> 
+		
+		</p:dataTable>
+
+		<p:commandButton action="index.xhtml" value="Voltar para tela de cadastro" styleClass="rounded-button" style="margin-right: 15px"/>
+		<p:commandButton action="#{jogoBean.quantidadeElementos()}" value="Quantidade de Elementos" styleClass="rounded-button" update="msgs formulario" />
+	</h:form>
+</h:body>
+
+</html>
